@@ -1,546 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Creative Development & Review Process | Noise Media</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --red: #C73C1E;
-    --cream: #F5F3EE;
-    --dark: #1B1B1B;
-    --mid: #3A3A3A;
-    --border: #D6D1C9;
-    --green: #4A7C59;
-    --amber: #D4A017;
-    --orange: #E8732A;
-  }
-
-  body {
-    background: var(--cream);
-    color: var(--dark);
-    font-family: 'Inter', -apple-system, sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* TOP BAR */
-  .topbar {
-    background: var(--dark);
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .logo {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    font-size: 22px;
-    color: #fff;
-    letter-spacing: 2px;
-  }
-  .logo span { color: var(--red); }
-
-  /* HEADER */
-  .header {
-    text-align: center;
-    padding: 80px 40px 50px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .header h1 {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    color: var(--dark);
-  }
-  .header p {
-    font-size: 17px;
-    color: var(--mid);
-    max-width: 560px;
-    margin: 0 auto;
-    font-style: italic;
-  }
-
-  /* PROCESS SECTION */
-  .process {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 24px 60px;
-  }
-
-  .step-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 24px;
-    overflow: hidden;
-    transition: box-shadow 0.2s;
-  }
-  .step-card:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  }
-
-  .step-header {
-    display: flex;
-    align-items: stretch;
-  }
-
-  .step-num {
-    background: var(--dark);
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    font-size: 22px;
-    min-width: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .step-title {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 16px 20px;
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-
-  .step-body {
-    padding: 20px 24px 24px;
-    border-top: 1px solid var(--border);
-  }
-
-  .step-row {
-    margin-bottom: 10px;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  .step-row:last-child { margin-bottom: 0; }
-
-  .label {
-    font-weight: 700;
-    color: var(--red);
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-    margin-right: 8px;
-  }
-
-  .step-outcome {
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px dashed var(--border);
-    color: var(--green);
-    font-style: italic;
-    font-size: 14px;
-  }
-  .step-outcome::before {
-    content: "\2192  ";
-  }
-
-  /* CONDITIONAL NOTE */
-  .condition-note {
-    text-align: center;
-    font-style: italic;
-    color: var(--mid);
-    font-size: 14px;
-    margin: -8px 0 16px;
-    padding: 0 24px;
-  }
-
-  /* OUTCOMES BADGES */
-  .outcomes {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-  }
-  .badge {
-    font-size: 13px;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 3px;
-  }
-  .badge.proceed { background: #E8F5E9; color: var(--green); }
-  .badge.tweaks { background: #FFF3E0; color: var(--orange); }
-  .badge.flag { background: #FFEBEE; color: var(--red); }
-
-  /* PAGE 2 - ESCALATION */
-  .divider {
-    max-width: 820px;
-    margin: 40px auto;
-    padding: 0 24px;
-  }
-  .divider hr {
-    border: none;
-    border-top: 2px solid var(--dark);
-  }
-
-  .section-header {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 24px 10px;
-  }
-  .section-header h2 {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(22px, 4vw, 30px);
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--red);
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .section-header p {
-    color: var(--mid);
-    font-size: 15px;
-    font-style: italic;
-  }
-
-  .escalation-cards {
-    max-width: 820px;
-    margin: 30px auto 0;
-    padding: 0 24px 60px;
-  }
-
-  .esc-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--dark);
-    border-radius: 4px;
-    margin-bottom: 24px;
-    padding: 24px 28px;
-  }
-
-  .esc-card h3 {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-    color: var(--dark);
-  }
-  .esc-card h3 .tag {
-    color: var(--red);
-    margin-right: 8px;
-  }
-
-  .esc-card p, .esc-card li {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--mid);
-  }
-
-  .esc-card ol {
-    padding-left: 20px;
-    margin: 8px 0;
-  }
-  .esc-card ol li { margin-bottom: 4px; }
-
-  .esc-card .note {
-    margin-top: 10px;
-    font-size: 14px;
-    font-style: italic;
-    color: var(--green);
-  }
-  .esc-card .note::before { content: "\2713 "; }
-
-  .esc-card .warn {
-    font-weight: 600;
-    color: var(--red);
-  }
-
-  /* FEEDBACK PROTOCOL */
-  .feedback-section {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--red);
-    border-radius: 4px;
-    padding: 28px;
-  }
-  .feedback-section h3 {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-    color: var(--dark);
-  }
-  .feedback-section h3 .tag { color: var(--red); margin-right: 8px; }
-
-  .fb-block {
-    margin-bottom: 18px;
-  }
-  .fb-block:last-child { margin-bottom: 0; }
-
-  .fb-block h4 {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .fb-block h4 .icon-yes { color: var(--green); }
-  .fb-block h4 .icon-no { color: var(--red); }
-  .fb-block h4 .icon-info { color: var(--dark); }
-  .fb-block h4 .icon-call { color: var(--orange); }
-
-  .fb-block ul {
-    list-style: none;
-    padding-left: 24px;
-  }
-  .fb-block ul li {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--mid);
-    position: relative;
-    padding-left: 14px;
-  }
-  .fb-block ul li::before {
-    content: "\2022";
-    position: absolute;
-    left: 0;
-    color: var(--border);
-  }
-
-  /* FOOTER */
-  .footer {
-    background: var(--dark);
-    padding: 30px 40px;
-    text-align: center;
-  }
-  .footer-inner {
-    max-width: 820px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .footer span {
-    color: rgba(255,255,255,0.5);
-    font-size: 13px;
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 0.5px;
-  }
-
-  @media (max-width: 600px) {
-    .topbar { padding: 16px 20px; }
-    .header { padding: 50px 20px 30px; }
-    .step-body { padding: 16px 18px 20px; }
-    .esc-card { padding: 18px 20px; }
-    .feedback-section { padding: 20px; }
-    .footer-inner { justify-content: center; text-align: center; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Collaboration & Development Flow | Noise Media</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --red: #C73C1E;
+            --cream: #F5F3EE;
+            --dark: #1B1B1B;
+            --mid: #3A3A3A;
+            --border: #D6D1C9;
+            --green: #4A7C59;
+            --amber: #D4A017;
+            --orange: #E8732A;
+        }
+        body {
+            background: var(--cream);
+            color: var(--dark);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .topbar {
+            background: var(--dark);
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 22px;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+        .logo span { color: var(--red); }
+        .header {
+            text-align: center;
+            padding: 80px 40px 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        .header p {
+            font-size: 17px;
+            color: var(--mid);
+            max-width: 560px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        .process {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+        .step-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .step-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .step-header {
+            display: flex;
+            align-items: stretch;
+        }
+        .step-num {
+            background: var(--dark);
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 22px;
+            min-width: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .step-title {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .step-body {
+            padding: 20px 24px 24px;
+            border-top: 1px solid var(--border);
+        }
+        .step-row {
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .step-row:last-child { margin-bottom: 0; }
+        .label {
+            font-weight: 700;
+            color: var(--red);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+        }
+        .step-outcome {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px dashed var(--border);
+            color: var(--green);
+            font-style: italic;
+            font-size: 14px;
+        }
+        .step-outcome::before {
+            content: "\2192 ";
+        }
+        .divider {
+            max-width: 820px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        .divider hr {
+            border: none;
+            border-top: 2px solid var(--dark);
+        }
+        .section-header {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px 10px;
+        }
+        .section-header h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(22px, 4vw, 30px);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--red);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .section-header p {
+            color: var(--mid);
+            font-size: 15px;
+            font-style: italic;
+        }
+        .escalation-cards {
+            max-width: 820px;
+            margin: 30px auto 0;
+            padding: 0 24px 60px;
+        }
+        .esc-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--dark);
+            border-radius: 4px;
+            margin-bottom: 24px;
+            padding: 24px 28px;
+        }
+        .esc-card h3 {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        .esc-card h3 .tag {
+            color: var(--red);
+            margin-right: 8px;
+        }
+        .esc-card p, .esc-card li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--mid);
+        }
+        .esc-card ol { padding-left: 20px; margin: 8px 0; }
+        .esc-card ol li { margin-bottom: 4px; }
+        .esc-card .note {
+            margin-top: 10px;
+            font-size: 14px;
+            font-style: italic;
+            color: var(--green);
+        }
+        .esc-card .note::before {
+            content: "\2713 ";
+        }
+        .esc-card .warn {
+            font-weight: 600;
+            color: var(--red);
+        }
+        .feedback-section {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--red);
+            border-radius: 4px;
+            padding: 28px;
+        }
+        .feedback-section h3 {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+        .feedback-section h3 .tag {
+            color: var(--red);
+            margin-right: 8px;
+        }
+        .fb-block { margin-bottom: 18px; }
+        .fb-block:last-child { margin-bottom: 0; }
+        .fb-block h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .fb-block h4 .icon-yes { color: var(--green); }
+        .fb-block h4 .icon-no { color: var(--red); }
+        .fb-block h4 .icon-info { color: var(--dark); }
+        .fb-block h4 .icon-call { color: var(--orange); }
+        .fb-block ul {
+            list-style: none;
+            padding-left: 24px;
+        }
+        .fb-block ul li {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--mid);
+            position: relative;
+            padding-left: 14px;
+        }
+        .fb-block ul li::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: var(--border);
+        }
+        .footer {
+            background: var(--dark);
+            padding: 30px 40px;
+            text-align: center;
+        }
+        .footer-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer span {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 600px) {
+            .topbar { padding: 16px 20px; }
+            .header { padding: 50px 20px 30px; }
+            .step-body { padding: 16px 18px 20px; }
+            .esc-card { padding: 18px 20px; }
+            .feedback-section { padding: 20px; }
+            .footer-inner { justify-content: center; text-align: center; }
+        }
+    </style>
 </head>
 <body>
+    <div class="topbar">
+        <div class="logo">NM<span>.</span></div>
+    </div>
 
-<div class="topbar">
-  <div class="logo">NM<span>.</span></div>
-</div>
+    <div class="header">
+        <h1>Creative Collaboration<br>& Development Flow</h1>
+        <p>This approach is designed to support how we work together across teams, ensuring creative ideas are set up for success and land as strongly as possible with clients.<br><br>By bringing in the right people at key moments, we:<br>&bull; Keep work closely aligned to the brief and client needs<br>&bull; Create space for input where it adds value<br>&bull; Ensure visibility across the team while maintaining clear creative ownership<br><br>Ultimately, this is about strengthening the work through collaboration, while keeping creative direction clear and focused.</p>
+    </div>
 
-<div class="header">
-  <h1>Creative Development<br>& Review Process</h1>
-  <p>This process is about working more collaboratively and making sure everyone feels part of the work we're creating for our clients.<br><br>By bringing account, strategy, paid and creative together at the right moments, we:<br>&bull; Keep work closely aligned to the brief and client needs<br>&bull; Create space for shared input and stronger ideas<br>&bull; Ensure visibility and collective ownership across the team<br><br>Ultimately, it's about combining perspectives to produce the best possible work together.</p>
-</div>
-
-<!-- STEP 1 -->
-<div class="process">
-  <div class="step-card">
-    <div class="step-header">
-      <div class="step-num">1</div>
-      <div class="step-title">Briefing & Alignment</div>
-    </div>
-    <div class="step-body">
-      <div class="step-row"><span class="label">Lead</span> Account Manager leads a clear creative brief session with the creative team</div>
-      <div class="step-row"><span class="label">Covers</span> Objectives & KPIs, deliverables & formats, role of content within the wider strategy, key messaging & guardrails</div>
-      <div class="step-outcome">Shared understanding of what success looks like</div>
-    </div>
-  </div>
-
-  <!-- STEP 2 -->
-  <div class="step-card">
-    <div class="step-header">
-      <div class="step-num">2</div>
-      <div class="step-title">Ideation & Direction Setting</div>
-    </div>
-    <div class="step-body">
-      <div class="step-row"><span class="label">Lead</span> Creative team runs a brainstorm session</div>
-      <div class="step-row"><span class="label">Attendees</span> AM and/or relevant strategist, paid media lead, or account team member where it makes sense</div>
-      <div class="step-row"><span class="label">Process</span> Ideas discussed, refined and challenged in the room. Narrowed down to a clear set of routes to progress.</div>
-      <div class="step-outcome">Agreed creative directions to take forward</div>
-    </div>
-  </div>
-
-  <div class="condition-note">If no cross-team members were present at ideation:</div>
-
-  <!-- STEP 3 -->
-  <div class="step-card">
-    <div class="step-header">
-      <div class="step-num">3</div>
-      <div class="step-title">Cross-Team Validation (If Needed)</div>
-    </div>
-    <div class="step-body">
-      <div class="step-row"><span class="label">When</span> If no team members outside creative (account, paid, strategy) were present at ideation</div>
-      <div class="step-row"><span class="label">Action</span> A short follow-up session is held to review and align on directions</div>
-      <div class="step-row"><span class="label">Ensures</span> Ideas match the brief, channel considerations are accounted for, no misalignment later</div>
-      <div class="step-outcome">Final confirmed routes for development</div>
-    </div>
-  </div>
-
-  <!-- STEP 4 -->
-  <div class="step-card">
-    <div class="step-header">
-      <div class="step-num">4</div>
-      <div class="step-title">Midway Checkpoint Setup</div>
-    </div>
-    <div class="step-body">
-      <div class="step-row"><span class="label">Lead</span> AM defines a midway review point &mdash; typically ~50% of time to final delivery</div>
-      <div class="step-row"><span class="label">Purpose</span> Sense-check one developed direction. Avoid late-stage rework.</div>
-      <div class="step-outcome">Checkpoint scheduled at the halfway mark</div>
-    </div>
-  </div>
-
-  <!-- STEP 5 -->
-  <div class="step-card">
-    <div class="step-header">
-      <div class="step-num">5</div>
-      <div class="step-title">Creative Development (WIP Review)</div>
-    </div>
-    <div class="step-body">
-      <div class="step-row"><span class="label">Stage</span> Creative team develops work to a clear directional stage &mdash; not fully polished, but strong enough to show concept, structure and execution</div>
-      <div class="step-row"><span class="label">Review</span> Creative lead (e.g. Beau) alignment, then quick review with AM / strategy / paid</div>
-      <div class="step-row">
-        <span class="label">Outcomes</span>
-        <div class="outcomes">
-          <span class="badge proceed">&#10003; Proceed</span>
-          <span class="badge tweaks">&#9632; Minor tweaks</span>
-          <span class="badge flag">&#9632; Flag gaps early</span>
+    <!-- STEP 1 -->
+    <div class="process">
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-num">1</div>
+                <div class="step-title">Briefing & Alignment</div>
+            </div>
+            <div class="step-body">
+                <div class="step-row"><span class="label">Lead</span> Account Manager (AM) briefs Beau and the creative team</div>
+                <div class="step-row"><span class="label">Covers</span> Objectives & KPIs, deliverables & formats, role of content within the wider strategy, key messaging & guardrails</div>
+                <div class="step-outcome">Shared understanding of what success looks like</div>
+            </div>
         </div>
-      </div>
-      <div class="step-outcome">Confidence in direction before final production</div>
-    </div>
-  </div>
 
-  <!-- STEP 6 -->
-  <div class="step-card">
-    <div class="step-header">
-      <div class="step-num">6</div>
-      <div class="step-title">Final Development & Delivery</div>
-    </div>
-    <div class="step-body">
-      <div class="step-row"><span class="label">Creative</span> Creative team completes assets following the aligned direction</div>
-      <div class="step-row"><span class="label">AM Checks</span> Output meets brief and is ready for client delivery</div>
-      <div class="step-outcome">Final assets delivered to client</div>
-    </div>
-  </div>
-</div>
+        <!-- STEP 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-num">2</div>
+                <div class="step-title">Ideation & Initial Brainstorm</div>
+            </div>
+            <div class="step-body">
+                <div class="step-row"><span class="label">Lead</span> Creative team and Beau lead an initial brainstorm session</div>
+                <div class="step-row"><span class="label">Focus</span> Generating a range of ideas aligned to the brief. Exploring different creative routes.</div>
+                <div class="step-outcome">Broad set of initial ideas</div>
+            </div>
+        </div>
 
-<!-- DIVIDER -->
-<div class="divider"><hr></div>
+        <!-- STEP 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-num">3</div>
+                <div class="step-title">Internal Creative Alignment</div>
+            </div>
+            <div class="step-body">
+                <div class="step-row"><span class="label">Action</span> Creative team refines brainstorm outputs and aligns on strongest concepts to take forward</div>
+                <div class="step-row"><span class="label">Selection Based On</span> Creative strength, brief alignment, client needs</div>
+                <div class="step-outcome">Shortlist of prioritised concepts</div>
+            </div>
+        </div>
 
-<!-- ESCALATION SECTION -->
-<div class="section-header">
-  <h2>Discrepancy & Escalation</h2>
-  <p>What happens when things don't align &mdash; clear paths to resolution</p>
-</div>
+        <!-- STEP 4 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-num">4</div>
+                <div class="step-title">Direction Shareback</div>
+            </div>
+            <div class="step-body">
+                <div class="step-row"><span class="label">Lead</span> Beau shares selected directions with Account Manager and relevant team members (paid, strategy, etc.)</div>
+                <div class="step-row"><span class="label">Purpose</span> Provide visibility on direction and bring in any key considerations early</div>
+                <div class="step-row"><span class="label">Account Team</span> Provides input where relevant and confirmation to proceed</div>
+                <div class="step-outcome">Aligned concepts to move into development</div>
+            </div>
+        </div>
 
-<div class="escalation-cards">
+        <!-- STEP 5 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-num">5</div>
+                <div class="step-title">Concept Development</div>
+            </div>
+            <div class="step-body">
+                <div class="step-row"><span class="label">Lead</span> Creative team develops selected concepts</div>
+                <div class="step-row"><span class="label">Focus</span> Bringing ideas to life with clear structure and execution. Preparing for internal review before client.</div>
+                <div class="step-outcome">Developed concepts ready for feedback</div>
+            </div>
+        </div>
 
-  <div class="esc-card">
-    <h3><span class="tag">[A]</span> Post-Brainstorm Misalignment</h3>
-    <p>If AM and creative team disagree on direction:</p>
-    <ol>
-      <li>Escalate to <strong>Account Director</strong> (e.g. Sam or Matt, and Beau if not previously involved)</li>
-      <li>Attempt to resolve through discussion and refinement</li>
-      <li>If still unresolved &rarr; escalate to <strong>Executive Leadership</strong> (Ant or Joe) for final decision</li>
-    </ol>
-  </div>
+        <!-- STEP 6 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-num">6</div>
+                <div class="step-title">Internal Review & Feedback</div>
+            </div>
+            <div class="step-body">
+                <div class="step-row"><span class="label">Process</span> Concepts are shared with AM with agreed time for feedback ahead of client deadline</div>
+                <div class="step-row"><span class="label">AM</span> Reviews against brief and client needs. Consolidates feedback.</div>
+                <div class="step-row"><span class="label">Creative Team</span> Refines and updates concepts</div>
+                <div class="step-outcome">Finalised concepts ready for client delivery</div>
+            </div>
+        </div>
 
-  <div class="esc-card">
-    <h3><span class="tag">[B]</span> Misalignment During Development</h3>
-    <p>If AM is not aligned on WIP creative:</p>
-    <ol>
-      <li>Escalate to <strong>Account Director</strong> for review</li>
-      <li>Align on changes or direction</li>
-      <li>If still unresolved &rarr; escalate to <strong>Ant or Joe</strong></li>
-    </ol>
-  </div>
-
-  <div class="esc-card">
-    <h3><span class="tag">[C]</span> New Ideas Introduced Mid-Process</h3>
-    <p>If new creative routes or ideas emerge during development:</p>
-    <p class="warn" style="margin-top:8px;">! AM must be consulted before progressing</p>
-    <div class="note">Ensures alignment with brief and prevents scope or strategy drift</div>
-  </div>
-
-  <div class="feedback-section">
-    <h3><span class="tag">[D]</span> Feedback & Communication Protocol</h3>
-    <p style="color:var(--mid);font-size:15px;margin-bottom:16px;">How feedback is shared and where communication happens:</p>
-
-    <div class="fb-block">
-      <h4><span class="icon-yes">&#10003;</span> All feedback on work should be:</h4>
-      <ul>
-        <li>Shared directly with the relevant person via Slack DM or a quick call</li>
-        <li>Discussed 1:1 or in a small, relevant group where needed</li>
-      </ul>
-    </div>
-
-    <div class="fb-block">
-      <h4><span class="icon-no">&#10007;</span> Avoid sharing feedback in public Slack channels</h4>
-      <ul>
-        <li>Channels are not for critique, opinions or directional feedback</li>
-        <li>This prevents confusion, noise and undermining of ownership</li>
-      </ul>
-    </div>
-
-    <div class="fb-block">
-      <h4><span class="icon-info">&#9632;</span> Slack channels should be used for:</h4>
-      <ul>
-        <li>Quick questions</li>
-        <li>Status updates</li>
-        <li>Progress check-ins</li>
-        <li>Information where wider visibility is needed</li>
-      </ul>
+        <!-- STEP 7 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-num">7</div>
+                <div class="step-title">Final Delivery</div>
+            </div>
+            <div class="step-body">
+                <div class="step-row"><span class="label">Creative</span> Creative team completes and prepares assets</div>
+                <div class="step-row"><span class="label">AM Ensures</span> Work meets brief and is ready for client presentation</div>
+                <div class="step-outcome">Final assets delivered to client</div>
+            </div>
+        </div>
     </div>
 
-    <div class="fb-block">
-      <h4><span class="icon-call">&#9742;</span> If feedback is nuanced or requires discussion:</h4>
-      <ul>
-        <li>Jump on a quick call rather than long written threads</li>
-        <li>Align clearly before wider sharing</li>
-      </ul>
+    <!-- DIVIDER -->
+    <div class="divider"><hr></div>
+
+    <!-- ESCALATION SECTION -->
+    <div class="section-header">
+        <h2>Alignment & Escalation</h2>
+        <p>What happens when things don't align &mdash; clear paths to resolution</p>
     </div>
-  </div>
 
-</div>
+    <div class="escalation-cards">
+        <div class="esc-card">
+            <h3><span class="tag">[A]</span> Alignment on Concepts</h3>
+            <p>If there are differing views when concepts are shared:</p>
+            <ol>
+                <li>Bring in <strong>Account Director</strong> (Sam or Matt, and Beau if needed)</li>
+                <li>Align through discussion and refinement</li>
+                <li>If needed &rarr; escalate to <strong>Ant or Joe</strong> for final steer</li>
+            </ol>
+        </div>
 
-<div class="footer">
-  <div class="footer-inner">
-    <span>NOISE MEDIA</span>
-    <span>CREATIVE DEVELOPMENT & REVIEW PROCESS</span>
-    <span>2026</span>
-  </div>
-</div>
+        <div class="esc-card">
+            <h3><span class="tag">[B]</span> New Ideas Introduced Mid-Process</h3>
+            <p>If new ideas or directions emerge after initial alignment:</p>
+            <p class="warn" style="margin-top:8px;">! AM should be looped in before progressing</p>
+            <div class="note">Ensures alignment with brief and prevents scope or strategy drift</div>
+        </div>
 
+        <div class="feedback-section">
+            <h3><span class="tag">[C]</span> Feedback & Communication Protocol</h3>
+            <p style="color:var(--mid);font-size:15px;margin-bottom:16px;">How feedback is shared and where communication happens:</p>
+
+            <div class="fb-block">
+                <h4><span class="icon-yes">&#10003;</span> All feedback on work should be:</h4>
+                <ul>
+                    <li>Shared directly with the relevant person</li>
+                    <li>Via Slack DM or a quick call, not public channels</li>
+                </ul>
+            </div>
+
+            <div class="fb-block">
+                <h4><span class="icon-info">&#9632;</span> Slack channels are for:</h4>
+                <ul>
+                    <li>Quick questions</li>
+                    <li>Status updates</li>
+                    <li>Progress check-ins</li>
+                    <li>Information where wider visibility is needed</li>
+                </ul>
+            </div>
+
+            <div class="fb-block">
+                <h4><span class="icon-call">&#9742;</span> For feedback:</h4>
+                <ul>
+                    <li>Keep it direct, clear and constructive</li>
+                    <li>Use calls or DMs for discussion, especially where nuance is needed</li>
+                </ul>
+            </div>
+
+            <div class="fb-block">
+                <h4><span class="icon-info">&#9632;</span> Principle:</h4>
+                <ul>
+                    <li>Direct conversations drive better work</li>
+                    <li>Channels are for visibility, not critique</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-inner">
+            <span>NOISE MEDIA</span>
+            <span>CREATIVE COLLABORATION & DEVELOPMENT FLOW</span>
+            <span>2026</span>
+        </div>
+    </div>
 </body>
 </html>
